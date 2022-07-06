@@ -8,15 +8,16 @@ namespace Vacation.Data.Models
 {
     public class Vacation
     {
-        public DateOnly From { get; set; }
+        public int Id { get; set; }
+        public DateTime From { get; set; }
 
-        public DateOnly To { get; set; }
+        public DateTime To { get; set; }
 
         public VacationType Type { get; set; }
 
         public int UserId { get; set; }
 
-        public User User { get; set; }
+        public User? User { get; set; }
     }
 
 }
