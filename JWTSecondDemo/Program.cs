@@ -18,7 +18,7 @@ builder.Services.AddDbContext<VacationDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-var key = "lectureTest1234$$$";
+var key = Environment.GetEnvironmentVariable("JWT_SECRET");
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -36,7 +36,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-builder.Services.AddSingleton<JwtAutheticationManager>(new JwtAutheticationManager(key));
+builder.Services.AddSingleton(new JwtAutheticationManager(key));
 
 var app = builder.Build();
 

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Vacation.Data.Models;
 
 namespace JWTSecondDemo.Controllers
 {
@@ -18,7 +19,7 @@ namespace JWTSecondDemo.Controllers
         [HttpPost]
         public IActionResult AuthUser([FromBody]User user)
         {
-            var token = jwtAutheticationManager.Authtenticate(user.Username, user.Password);
+            var token = jwtAutheticationManager.Authtenticate(user.FirstName, user.Password);
             if (token == null)
             {
                 return Unauthorized();
