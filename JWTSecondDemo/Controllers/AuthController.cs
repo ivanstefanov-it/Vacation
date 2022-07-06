@@ -19,15 +19,15 @@ namespace JWTSecondDemo.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult AuthUser([FromBody]UserDto user)
+        public ActionResult<BaseCommandResponse> AuthUser([FromBody]UserDto user)
         {
-            var token = jwtAutheticationService.Authenticate(user.FirstName, user.Password);
-            if (token == null)
+            var response = jwtAutheticationService.Authenticate(user.FirstName, user.Password);
+            if (response.Success == false)
             {
                 return Unauthorized();
             }
 
-            return Ok(token);
+            return Ok(response);
         }
 
         [AllowAnonymous]

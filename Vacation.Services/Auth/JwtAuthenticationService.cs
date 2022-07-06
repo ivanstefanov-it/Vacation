@@ -24,12 +24,14 @@ namespace Vacation.Services.Auth
             _vacationDbContext = vacationDbContext;
         }
 
-        public string Authenticate(string username, string password)
+        public BaseCommandResponse Authenticate(string username, string password)
         {
             if (!_vacationDbContext.Users.Any(x => x.FirstName == username && x.Password == password))
             {
                 return null;
             }
+
+            var user = _vacationDbContext.Users.Where(x => x.FirstName.Equals(username)).FirstOrDefault();
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             var key = Environment.GetEnvironmentVariable("JWT_SECRET");
@@ -50,9 +52,12 @@ namespace Vacation.Services.Auth
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
 
+            var response = new BaseCommandResponse();
+            response.Success = true;
+            response.Token = tokenHandler.WriteToken(token);
+            response.Id = user.Id;
 
-
-            return tokenHandler.WriteToken(token);
+            return response;
         }
 
         public async Task<bool> Register(string firstName, string password)
@@ -76,6 +81,8 @@ namespace Vacation.Services.Auth
             };
             await _vacationDbContext.Users.AddAsync(user);
             _vacationDbContext.SaveChanges();
+
+
             return true;
         }
     }

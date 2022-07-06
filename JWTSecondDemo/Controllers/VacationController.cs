@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Vacation.Services.Vacation;
 using Vacation.Services.Vacation.Models;
 
@@ -16,6 +17,7 @@ namespace JWTSecondDemo.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public IActionResult Create(VacationCreateModel vacation)
         {
             try
