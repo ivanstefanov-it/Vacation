@@ -5,6 +5,7 @@ using System.Text;
 using Vacation.Data;
 using Microsoft.EntityFrameworkCore;
 using Vacation.Services.Auth;
+using Vacation.Services.Vacation;
 
 var builder = WebApplication.CreateBuilder(args);
 string connString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -19,6 +20,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IJwtAuthenticationService, JwtAuthenticationService>();
+builder.Services.AddScoped<IVacationService, VacationService>();
 
 
 var key = Environment.GetEnvironmentVariable("JWT_SECRET");
