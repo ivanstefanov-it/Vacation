@@ -14,7 +14,7 @@ namespace Vacation.Data
         {
 
         }
-        public DbSet<User> Demo { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public DbSet<Models.Vacation> Vacations { get; set; }
     }

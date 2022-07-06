@@ -12,13 +12,17 @@ string connString = builder.Configuration.GetConnectionString("DefaultConnection
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+builder.Services.AddDbContext<VacationDbContext>(options => options.UseSqlServer(connString));
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<VacationDbContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-var key = "lectureTest1234$$$";
+
+
+var key = Environment.GetEnvironmentVariable("JWT_SECRET");
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -36,7 +40,7 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-builder.Services.AddSingleton<JwtAutheticationManager>(new JwtAutheticationManager(key));
+builder.Services.AddSingleton(new JwtAutheticationManager(key));
 
 var app = builder.Build();
 
@@ -48,6 +52,12 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dataContext = scope.ServiceProvider.GetRequiredService<VacationDbContext>();
+    dataContext.Database.Migrate();
+}
 
 app.UseAuthentication();
 app.UseAuthorization();
