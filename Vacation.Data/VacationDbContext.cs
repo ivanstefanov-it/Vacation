@@ -16,11 +16,7 @@ namespace Vacation.Data
         }
         public DbSet<User> Demo { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=4WJ8LH2;Database=master;Trusted_Connection=True;");
-            base.OnConfiguring(optionsBuilder);
-        }
+        public DbSet<Models.Vacation> Vacations { get; set; }
     }
 
 }
