@@ -26,6 +26,6 @@
         //public string Team { get; set; }
 
 
-        public ICollection<Vacantion> Vacantions { get; set; }
+        public ICollection<Vacation> Vacantions { get; set; }
     }
 }

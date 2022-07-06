@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Vacation.Data.Models
 {
-    public class Vacantion
+    public class Vacation
     {
         public DateOnly From { get; set; }
 
