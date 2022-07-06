@@ -60,6 +60,14 @@ namespace Vacation.Services.Auth
             return response;
         }
 
+        public User GetUserById(int id)
+        {
+            var user = _vacationDbContext.Users.Find(id);
+            //var user = _vacationDbContext.Users.Where(x => x.Id == id).FirstOrDefault();
+
+            return user;
+        }
+
         public async Task<bool> Register(string firstName, string password)
         {
             if (firstName == null || password == null)

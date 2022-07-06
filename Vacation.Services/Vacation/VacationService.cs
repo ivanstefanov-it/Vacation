@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Vacation.Data;
+using Vacation.Services.Auth;
 using Vacation.Services.Vacation.Models;
 
 namespace Vacation.Services.Vacation
@@ -11,10 +12,12 @@ namespace Vacation.Services.Vacation
     public class VacationService : IVacationService
     {
         private readonly VacationDbContext _vacationDbContext;
+        private readonly IJwtAuthenticationService _jwtAuthenticationService;
 
-        public VacationService(VacationDbContext vacationDbContext)
+        public VacationService(VacationDbContext vacationDbContext, IJwtAuthenticationService jwtAuthenticationService)
         {
             _vacationDbContext = vacationDbContext;
+            _jwtAuthenticationService = jwtAuthenticationService;
         }
 
         public void Create(VacationCreateModel vacation)
@@ -36,6 +39,17 @@ namespace Vacation.Services.Vacation
             });
 
             _vacationDbContext.SaveChanges();
+        }
+
+        public IReadOnlyList<Data.Models.Vacation> GetAllVacations()
+        {
+            var vacations = _vacationDbContext.Vacations.ToList();
+            foreach (var item in vacations)
+            {
+                item.User = _jwtAuthenticationService.GetUserById(item.UserId);
+            }
+
+            return vacations;
         }
     }
 }

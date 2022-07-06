@@ -32,5 +32,10 @@ namespace JWTSecondDemo.Controllers
 
             return Ok();
         }
+        [HttpGet]
+        public ActionResult<IReadOnlyList<Vacation.Data.Models.Vacation>> GetAllVacations()
+        {
+            return Ok(_vacationService.GetAllVacations());
+        }
     }
 }

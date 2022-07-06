@@ -10,5 +10,6 @@ namespace Vacation.Services.Vacation
     public interface IVacationService
     {
         void Create(VacationCreateModel vacation);
+        IReadOnlyList<Data.Models.Vacation> GetAllVacations();
     }
 }
