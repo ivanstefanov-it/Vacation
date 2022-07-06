@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using Vacation.Data;
+using Vacation.Data.Models;
 
 namespace Vacation.Services.Auth
 {
@@ -51,6 +53,30 @@ namespace Vacation.Services.Auth
 
 
             return tokenHandler.WriteToken(token);
+        }
+
+        public async Task<bool> Register(string firstName, string password)
+        {
+            if (firstName == null || password == null)
+            {
+                return false;
+            }
+
+            var user = new User()
+            {
+                //Id = 123,
+                FirstName = firstName,
+                LastName = "Admin",
+                Password = password,
+                MiddleName = "admin",
+                BirthPlace = "Sofia",
+                WorkExperienceInDays = 10,
+                StartDate = DateTime.Now,
+                VacationHours = 10
+            };
+            await _vacationDbContext.Users.AddAsync(user);
+            _vacationDbContext.SaveChanges();
+            return true;
         }
     }
 }
