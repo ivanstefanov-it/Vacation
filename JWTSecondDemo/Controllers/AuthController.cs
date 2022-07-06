@@ -18,7 +18,7 @@ namespace JWTSecondDemo.Controllers
         [HttpPost]
         public IActionResult AuthUser([FromBody]User user)
         {
-            var token = jwtAutheticationManager.Authtenticate(user.username, user.password);
+            var token = jwtAutheticationManager.Authtenticate(user.Username, user.Password);
             if (token == null)
             {
                 return Unauthorized();
