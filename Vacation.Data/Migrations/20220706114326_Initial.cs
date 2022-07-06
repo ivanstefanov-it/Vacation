@@ -60,6 +60,11 @@ namespace Vacation.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Users",
+                columns: new[] { "Id", "Address", "BankDetails", "BirthPlace", "CardAuthority", "Country", "Discipline", "FirstName", "IBAN", "IdCard", "LastName", "MiddleName", "Office", "Password", "StartDate", "VacationHours", "WorkExperienceInCompanyInDays", "WorkExperienceInDays" },
+                values: new object[] { 123, null, null, "Sofia", null, null, null, "System", null, null, "Admin", "admin", null, "123456", new DateTime(2022, 7, 6, 14, 43, 26, 278, DateTimeKind.Local).AddTicks(1567), 10, null, 10 });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Vacations_UserId",
                 table: "Vacations",

@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 using Vacation.Data.Models;
+using Vacation.Services.Auth;
+using JWTSecondDemo.Models;
 
 namespace JWTSecondDemo.Controllers
 {
@@ -8,18 +10,18 @@ namespace JWTSecondDemo.Controllers
     [Route("[controller]")]
     public class AuthController : ControllerBase
     {
-        private readonly JwtAutheticationManager jwtAutheticationManager;
+        private readonly IJwtAuthenticationService jwtAutheticationService;
 
-        public AuthController(JwtAutheticationManager jwtAutheticationManager)
+        public AuthController(IJwtAuthenticationService jwtAutheticationManager)
         {
-            this.jwtAutheticationManager = jwtAutheticationManager;
+            this.jwtAutheticationService = jwtAutheticationManager;
         }
 
         [AllowAnonymous]
         [HttpPost]
-        public IActionResult AuthUser([FromBody]User user)
+        public IActionResult AuthUser([FromBody]UserDto user)
         {
-            var token = jwtAutheticationManager.Authtenticate(user.FirstName, user.Password);
+            var token = jwtAutheticationService.Authenticate(user.FirstName, user.Password);
             if (token == null)
             {
                 return Unauthorized();

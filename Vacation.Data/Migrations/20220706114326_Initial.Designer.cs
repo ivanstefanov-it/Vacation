@@ -12,7 +12,7 @@ using Vacation.Data;
 namespace Vacation.Data.Migrations
 {
     [DbContext(typeof(VacationDbContext))]
-    [Migration("20220706100349_Initial")]
+    [Migration("20220706114326_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -91,6 +91,20 @@ namespace Vacation.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 123,
+                            BirthPlace = "Sofia",
+                            FirstName = "System",
+                            LastName = "Admin",
+                            MiddleName = "admin",
+                            Password = "123456",
+                            StartDate = new DateTime(2022, 7, 6, 14, 43, 26, 278, DateTimeKind.Local).AddTicks(1567),
+                            VacationHours = 10,
+                            WorkExperienceInDays = 10
+                        });
                 });
 
             modelBuilder.Entity("Vacation.Data.Models.Vacation", b =>

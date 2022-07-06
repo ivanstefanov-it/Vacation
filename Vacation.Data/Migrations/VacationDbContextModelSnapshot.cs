@@ -89,6 +89,20 @@ namespace Vacation.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 123,
+                            BirthPlace = "Sofia",
+                            FirstName = "System",
+                            LastName = "Admin",
+                            MiddleName = "admin",
+                            Password = "123456",
+                            StartDate = new DateTime(2022, 7, 6, 14, 43, 26, 278, DateTimeKind.Local).AddTicks(1567),
+                            VacationHours = 10,
+                            WorkExperienceInDays = 10
+                        });
                 });
 
             modelBuilder.Entity("Vacation.Data.Models.Vacation", b =>

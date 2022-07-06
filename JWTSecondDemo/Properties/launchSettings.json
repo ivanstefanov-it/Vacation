@@ -17,7 +17,7 @@
       "applicationUrl": "https://localhost:7149;http://localhost:5149",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "JWT_SECRET": "secret key"
+        "JWT_SECRET": "sdsafassdgfddfhgdfzhdzhfzfdhdhdfdz"
       }
     },
     "IIS Express": {
@@ -26,7 +26,7 @@
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development",
-        "JWT_SECRET": "secret key"
+        "JWT_SECRET": "sdsafassdgfddfhgdfzhdzhfzfdhdhdfdz"
       }
     }
   }

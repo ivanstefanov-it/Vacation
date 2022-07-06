@@ -1,35 +1,36 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using System.Text;
-using System.Security.Claims;
-using System.IdentityModel.Tokens.Jwt;
+﻿using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using Vacation.Data;
 
-namespace JWTSecondDemo
+namespace Vacation.Services.Auth
 {
-    public class JwtAutheticationManager
+    public class JwtAuthenticationService : IJwtAuthenticationService
     {
-        private readonly string key;
 
-        private readonly IDictionary<string, string> users = new Dictionary<string, string>()
-        {
-            {"test", "password" },
-            {"ivan", "stefanov" },
-            {"test1", "pass" },
-        };
+        private readonly VacationDbContext _vacationDbContext;
 
-        public JwtAutheticationManager(string key)
+
+        public JwtAuthenticationService( VacationDbContext vacationDbContext)
         {
-            this.key = key;
+            _vacationDbContext = vacationDbContext;
         }
 
-        public string Authtenticate(string username, string password)
+        public string Authenticate(string username, string password)
         {
-            if (!users.Any(x => x.Key == username && x.Value == password))
+            if (!_vacationDbContext.Users.Any(x => x.FirstName == username && x.Password == password))
             {
                 return null;
             }
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var key = Environment.GetEnvironmentVariable("JWT_SECRET");
             var tokenKey = Encoding.ASCII.GetBytes(key);
             SecurityTokenDescriptor tokenDescriptor = new SecurityTokenDescriptor
             {
@@ -41,7 +42,7 @@ namespace JWTSecondDemo
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
-                    SecurityAlgorithms.HmacSha256Signature 
+                    SecurityAlgorithms.HmacSha256Signature
                     )
             };
 

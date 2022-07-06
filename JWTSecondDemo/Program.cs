@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Vacation.Data;
 using Microsoft.EntityFrameworkCore;
+using Vacation.Services.Auth;
 
 var builder = WebApplication.CreateBuilder(args);
 string connString = builder.Configuration.GetConnectionString("DefaultConnection");
@@ -16,10 +17,8 @@ builder.Services.AddDbContext<VacationDbContext>(options => options.UseSqlServer
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddDbContext<VacationDbContext>(options =>
-                 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-
+builder.Services.AddScoped<IJwtAuthenticationService, JwtAuthenticationService>();
 
 
 var key = Environment.GetEnvironmentVariable("JWT_SECRET");
@@ -40,7 +39,6 @@ builder.Services.AddAuthentication(x =>
     };
 });
 
-builder.Services.AddSingleton(new JwtAutheticationManager(key));
 
 var app = builder.Build();
 

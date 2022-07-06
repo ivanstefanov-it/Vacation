@@ -5,7 +5,9 @@ VisualStudioVersion = 17.2.32602.215
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JWTSecondDemo", "JWTSecondDemo\JWTSecondDemo.csproj", "{94876861-FD96-4756-9CBC-AF9963AB9560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacation.Data", "Vacation.Data\Vacation.Data.csproj", "{CFB9B743-2750-4AF3-A696-A7F1604E85AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vacation.Data", "Vacation.Data\Vacation.Data.csproj", "{CFB9B743-2750-4AF3-A696-A7F1604E85AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Vacation.Services", "Vacation.Services\Vacation.Services.csproj", "{F85261E3-6077-44E2-B721-B1D6BE7AB29F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{CFB9B743-2750-4AF3-A696-A7F1604E85AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CFB9B743-2750-4AF3-A696-A7F1604E85AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CFB9B743-2750-4AF3-A696-A7F1604E85AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F85261E3-6077-44E2-B721-B1D6BE7AB29F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F85261E3-6077-44E2-B721-B1D6BE7AB29F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F85261E3-6077-44E2-B721-B1D6BE7AB29F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F85261E3-6077-44E2-B721-B1D6BE7AB29F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
