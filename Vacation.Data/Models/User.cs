@@ -5,6 +5,7 @@
         public string FirstName { get; set; }
         public string MiddleName { get; set; }
         public string LastName { get; set; }
+        public string Password { get; set; }
         public string BirthPlace { get; set; }
         //public DateOnly BirthDate { get; set; }
         public string Country { get; set; }
@@ -24,8 +25,6 @@
         public string Discipline { get; set; }
         //public string Function { get; set; }
         //public string Team { get; set; }
-
-
-        public ICollection<Vacation> Vacantions { get; set; }
+        public ICollection<Vacation> Vacations { get; set; }
     }
 }
