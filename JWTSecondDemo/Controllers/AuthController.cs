@@ -29,5 +29,18 @@ namespace JWTSecondDemo.Controllers
 
             return Ok(token);
         }
+
+        [AllowAnonymous]
+        [HttpPut]
+        public async Task<IActionResult> RegisterUser([FromBody] UserDto user)
+        {
+            var result = await jwtAutheticationService.Register(user.FirstName, user.Password);
+            if (result == false)
+            {
+                return BadRequest();
+            }
+
+            return Ok();
+        }
     } 
 }
