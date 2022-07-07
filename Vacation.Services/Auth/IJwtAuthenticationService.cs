@@ -13,5 +13,6 @@ namespace Vacation.Services.Auth
         BaseCommandResponse Authenticate(string username, string password);
         Task<bool> Register(string username, string password);
         User GetUserById(int id);
+        Task<IReadOnlyList<User>> GetAllUsersAsync();
     }
 }

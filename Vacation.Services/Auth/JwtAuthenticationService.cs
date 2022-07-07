@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
@@ -92,6 +93,13 @@ namespace Vacation.Services.Auth
 
 
             return true;
+        }
+
+        public async Task<IReadOnlyList<User>> GetAllUsersAsync()
+        {
+            var users = await _vacationDbContext.Users.ToListAsync();
+
+            return users;
         }
     }
 }

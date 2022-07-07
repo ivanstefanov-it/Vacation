@@ -18,11 +18,12 @@ namespace JWTSecondDemo.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Create(VacationCreateModel vacation)
+        public ActionResult<Vacation.Data.Models.Vacation> Create(VacationCreateModel vacation)
         {
+            Vacation.Data.Models.Vacation result;
             try
             {
-                _vacationService.Create(vacation);
+                result = _vacationService.Create(vacation);
             }
             catch (Exception )
             {
@@ -30,7 +31,7 @@ namespace JWTSecondDemo.Controllers
                 return BadRequest();
             }
 
-            return Ok();
+            return Ok(result);
         }
         [HttpGet]
         public ActionResult<IReadOnlyList<Vacation.Data.Models.Vacation>> GetAllVacations()
