@@ -20,7 +20,7 @@ namespace Vacation.Services.Vacation
             _jwtAuthenticationService = jwtAuthenticationService;
         }
 
-        public void Create(VacationCreateModel vacation)
+        public Data.Models.Vacation Create(VacationCreateModel vacation)
         {
             var user = _vacationDbContext.Users.FirstOrDefault(u => u.Id == vacation.UserId);
 
@@ -29,16 +29,20 @@ namespace Vacation.Services.Vacation
                 throw new Exception("Invalid user ID");
             }
 
-            _vacationDbContext.Vacations.Add(new Data.Models.Vacation
+
+            var regVacation = new Data.Models.Vacation
             {
                 UserId = vacation.UserId,
                 User = user,
                 Type = vacation.Type,
                 From = vacation.From,
                 To = vacation.To
-            });
+            };
+            _vacationDbContext.Vacations.Add(regVacation);
 
             _vacationDbContext.SaveChanges();
+
+            return regVacation;
         }
 
         public IReadOnlyList<Data.Models.Vacation> GetAllVacations()

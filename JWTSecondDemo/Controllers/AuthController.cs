@@ -42,5 +42,13 @@ namespace JWTSecondDemo.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        public async Task<IReadOnlyList<User>> GetAllUsers()
+        {
+            var users = await jwtAutheticationService.GetAllUsersAsync();
+
+            return users;
+        }
     } 
 }

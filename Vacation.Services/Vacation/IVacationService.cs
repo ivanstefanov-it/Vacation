@@ -9,7 +9,7 @@ namespace Vacation.Services.Vacation
 {
     public interface IVacationService
     {
-        void Create(VacationCreateModel vacation);
+        Data.Models.Vacation Create(VacationCreateModel vacation);
         IReadOnlyList<Data.Models.Vacation> GetAllVacations();
     }
 }
